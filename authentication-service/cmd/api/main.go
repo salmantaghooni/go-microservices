@@ -1,9 +1,9 @@
 package main
 
 import (
-	"authentication-service/data"
 	"database/sql"
 	"fmt"
+	"authentication-service/data"
 	"log"
 	"net/http"
 	"os"
