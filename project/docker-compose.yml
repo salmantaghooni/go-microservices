@@ -31,6 +31,17 @@ services:
     networks:
       - brs-network
 
+  logger-service:
+    build:
+      context: ./../logger-service
+      dockerfile: ./../logger-service/logger-service.dockerfile
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 1
+    networks:
+      - brs-network
+
   postgres:
     image: 'postgres:14.0'
     ports:
@@ -47,6 +58,17 @@ services:
       - ./db-data/postgres/:/var/lib/postgresql/data/
     networks:
       - brs-network
+
+  mongo:
+    image: 'mongo:4.2.16-bionic'
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: logs
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./db-data/mongo/:/data/db
 
 networks:
   brs-network:
