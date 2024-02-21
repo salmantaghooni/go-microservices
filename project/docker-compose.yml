@@ -64,6 +64,14 @@ services:
       FROM_NAME: "John Smith"
       FROM_ADDRESS: salman.taghooni@gmail.com
 
+  listener-service:
+    build:
+      context: ./../listener-service
+      dockerfile: ./../listener-service/listener-service.dockerfile
+    deploy:
+      mode: replicated
+      replicas: 1
+
   postgres:
     image: 'postgres:14.0'
     ports:
